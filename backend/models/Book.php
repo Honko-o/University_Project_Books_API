@@ -86,8 +86,6 @@ class Book extends \yii\db\ActiveRecord
 
         $categories = Yii::$app->request->getBodyParam('categories', []);
         $categoryModels = Categories::findAll($categories);
-//        VarDumper::dump($categoryModels);
-//        die;
 
         if ($this->isNewRecord) {
             $this->link('categories', $categoryModels);
