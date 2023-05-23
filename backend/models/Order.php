@@ -16,10 +16,8 @@ use Yii;
  * @property int|null $updated_at
  *
  * @property Book[] $books
- * @property Book[] $books0
  * @property User $createdBy
  * @property OrderItems[] $orderItems
- * @property OrderItems[] $orderItems0
  */
 class Order extends \yii\db\ActiveRecord
 {
@@ -71,16 +69,6 @@ class Order extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Books0]].
-     *
-     * @return \yii\db\ActiveQuery|\backend\models\query\BookQuery
-     */
-    public function getBooks0()
-    {
-        return $this->hasMany(Book::class, ['id' => 'book_id'])->viaTable('order_items', ['order_id' => 'id']);
-    }
-
-    /**
      * Gets query for [[CreatedBy]].
      *
      * @return \yii\db\ActiveQuery|\backend\models\query\UserQuery
@@ -96,16 +84,6 @@ class Order extends \yii\db\ActiveRecord
      * @return \yii\db\ActiveQuery|\backend\models\query\OrderItemsQuery
      */
     public function getOrderItems()
-    {
-        return $this->hasMany(OrderItems::class, ['order_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[OrderItems0]].
-     *
-     * @return \yii\db\ActiveQuery|\backend\models\query\OrderItemsQuery
-     */
-    public function getOrderItems0()
     {
         return $this->hasMany(OrderItems::class, ['order_id' => 'id']);
     }

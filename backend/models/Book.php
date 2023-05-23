@@ -3,7 +3,6 @@
 namespace backend\models;
 
 use Yii;
-use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "book".
@@ -29,7 +28,6 @@ use yii\helpers\VarDumper;
  * @property User $createdBy
  * @property OrderItems[] $orderItems
  * @property Order[] $orders
- * @property Order[] $orders0
  */
 class Book extends \yii\db\ActiveRecord
 {
@@ -85,14 +83,31 @@ class Book extends \yii\db\ActiveRecord
         parent::afterSave($insert, $changedAttributes);
 
         $categories = Yii::$app->request->getBodyParam('categories', []);
+        $authors = Yii::$app->request->getBodyParam('authors', []);
         $categoryModels = Categories::findAll($categories);
+        $authorsModels = [];
+
+        foreach ($authors as $authorData) {
+            $author = Author::findOne(['name' => $authorData['name']]);
+            if (!$author) {
+                $author = new Author();
+                $author->name = $authorData['name'];
+                $author->save();
+            }
+            $authorsModels[] = $author;
+        }
 
         if ($this->isNewRecord) {
             $this->link('categories', $categoryModels);
+            $this->link('authors', $authorsModels);
         } else {
             $this->unlinkAll('categories', true);
+            $this->unlinkAll('authors', true);
             foreach ($categoryModels as $categoryModel) {
                 $this->link('categories', $categoryModel);
+            }
+            foreach ($authorsModels as $authorModel) {
+                $this->link('authors', $authorModel);
             }
         }
     }
@@ -168,13 +183,23 @@ class Book extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Orders0]].
+     * Gets query for [[FavoriteBooks]].
      *
-     * @return \yii\db\ActiveQuery|\backend\models\query\OrderQuery
+     * @return \yii\db\ActiveQuery|\backend\models\query\FavoriteBookQuery
      */
-    public function getOrders0()
+    public function getFavoriteBooks()
     {
-        return $this->hasMany(Order::class, ['id' => 'order_id'])->viaTable('order_items', ['book_id' => 'id']);
+        return $this->hasMany(FavoriteBook::class, ['book_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Users]].
+     *
+     * @return \yii\db\ActiveQuery|\backend\models\query\UserQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(User::class, ['id' => 'user_id'])->viaTable('favorite_book', ['book_id' => 'id']);
     }
 
     /**

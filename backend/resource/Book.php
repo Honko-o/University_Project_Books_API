@@ -18,15 +18,9 @@
             ];
         }
 
-
         public function fields()
         {
-            return array_merge(parent::fields(), ['categories']);
-        }
-
-        public function extraFields()
-        {
-            return ['categories'];
+            return array_merge(parent::fields(), ['categories', 'authors']);
         }
 
         /**

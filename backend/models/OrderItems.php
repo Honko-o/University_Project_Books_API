@@ -14,7 +14,6 @@ use Yii;
  *
  * @property Book $book
  * @property Order $order
- * @property Order $order0
  */
 class OrderItems extends \yii\db\ActiveRecord
 {
@@ -70,16 +69,6 @@ class OrderItems extends \yii\db\ActiveRecord
      * @return \yii\db\ActiveQuery|\backend\models\query\OrderQuery
      */
     public function getOrder()
-    {
-        return $this->hasOne(Order::class, ['id' => 'order_id']);
-    }
-
-    /**
-     * Gets query for [[Order0]].
-     *
-     * @return \yii\db\ActiveQuery|\backend\models\query\OrderQuery
-     */
-    public function getOrder0()
     {
         return $this->hasOne(Order::class, ['id' => 'order_id']);
     }

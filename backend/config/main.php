@@ -51,6 +51,7 @@ return [
                             'author',
                             'book-author',
                             'book',
+                            'favorite-book',
                             'categories',
                             'order',
                             'order-items',
@@ -58,7 +59,8 @@ return [
                             'post',
                         ],
                     'pluralize' => true,
-                ]
+                ],
+
             ],
         ],
     ],

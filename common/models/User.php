@@ -3,7 +3,6 @@
 namespace common\models;
 
 use Yii;
-use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
@@ -23,6 +22,11 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ *
+ * @property Book[] $books
+ * @property Book[] $favoriteBooksThroughJoinTable
+ * @property FavoriteBook[] $favoriteBooks
+ * @property Order[] $orders
  */
 class User extends ActiveRecord implements IdentityInterface
 {
