@@ -8,9 +8,7 @@ use Yii;
  * This is the model class for table "order".
  *
  * @property int $id
- * @property string $order_date
  * @property string $status
- * @property string $order_type
  * @property int|null $created_by
  * @property int|null $created_at
  * @property int|null $updated_at
@@ -35,10 +33,12 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_date', 'status', 'order_type'], 'required'],
-            [['order_date'], 'safe'],
+            [['status'], 'required'],
+            [['status', 'order_type'], 'required'],
+            [['created_by', 'created_at', 'updated_at'], 'integer'],
             [['status'], 'string', 'max' => 10],
             [['order_type'], 'string', 'max' => 5],
+            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
         ];
     }
 
@@ -49,12 +49,11 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'order_date' => 'Order Date',
             'status' => 'Status',
-            'order_type' => 'Order Type',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'order_type' => 'Order Type',
         ];
     }
 

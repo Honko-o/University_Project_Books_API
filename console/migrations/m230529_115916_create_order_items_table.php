@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%order_items}}`.
  */
-class m230505_224201_create_order_items_table extends Migration
+class m230529_115916_create_order_items_table extends Migration
 {
     /**
      * {@inheritdoc}

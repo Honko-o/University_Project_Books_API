@@ -55,6 +55,16 @@
         }
 
         /**
+         * Gets query for [[OrderItems]].
+         *
+         * @return \yii\db\ActiveQuery|\backend\models\query\OrderItemsQuery
+         */
+        public function getOrderItems()
+        {
+            return $this->hasMany(OrderItems::class, ['user_id' => 'id']);
+        }
+
+        /**
          * {@inheritdoc}
          * @return \backend\models\query\UserQuery the active query used by this AR class.
          */

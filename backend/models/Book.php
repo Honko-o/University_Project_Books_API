@@ -26,6 +26,8 @@ use Yii;
  * @property BookCategories[] $bookCategories
  * @property Categories[] $categories
  * @property User $createdBy
+ * @property User[] $users
+ * @property FavoriteBook[] $favoriteBooks
  * @property OrderItems[] $orderItems
  * @property Order[] $orders
  */

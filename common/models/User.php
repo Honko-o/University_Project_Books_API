@@ -27,6 +27,7 @@ use yii\web\IdentityInterface;
  * @property Book[] $favoriteBooksThroughJoinTable
  * @property FavoriteBook[] $favoriteBooks
  * @property Order[] $orders
+ * @property OrderItems[] $orderItems
  */
 class User extends ActiveRecord implements IdentityInterface
 {
