@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\resource\Book;
 use Yii;
 use backend\components\ActiveController;
 use backend\models\FavoriteBook;
@@ -24,7 +25,7 @@ class FavoriteBookController extends ActiveController
     {
         $model = new FavoriteBook();
         $model->user_id = Yii::$app->user->id;
-        $model->book_id = Yii::$app->request->post('book_id');
+        $model->book_id = Yii::$app->request->post(Book::BOOK_ID);
 
         if ($model->save()) {
             return $model;

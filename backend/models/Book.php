@@ -34,6 +34,9 @@ use yii\helpers\VarDumper;
  */
 class Book extends \yii\db\ActiveRecord
 {
+
+    public const BOOK_ID = 'book_id';
+
     /**
      * {@inheritdoc}
      */
@@ -85,8 +88,8 @@ class Book extends \yii\db\ActiveRecord
     {
         parent::afterSave($insert, $changedAttributes);
 
-        $categories = Yii::$app->request->getBodyParam('categories', []);
-        $authors = Yii::$app->request->getBodyParam('authors', []);
+        $categories = Yii::$app->request->getBodyParam(Categories::CATEGORIES, []);
+        $authors = Yii::$app->request->getBodyParam(Author::AUTHORS, []);
         $categoryModels = Categories::findAll($categories);
         $authorsModels = [];
 
@@ -101,17 +104,20 @@ class Book extends \yii\db\ActiveRecord
         }
 
         if ($this->isNewRecord) {
-            $this->link('categories', $categoryModels);
-            $this->link('authors', $authorsModels);
+            $this->link(Categories::CATEGORIES, $categoryModels);
+            $this->link(Author::AUTHORS, $authorsModels);
         } else {
-            $this->unlinkAll('categories', true);
-            $this->unlinkAll('authors', true);
+            $this->unlinkAll(Categories::CATEGORIES, true);
+            $this->unlinkAll(Author::AUTHORS, true);
+
             foreach ($categoryModels as $categoryModel) {
-                $this->link('categories', $categoryModel);
+                $this->link(Categories::CATEGORIES, $categoryModel);
             }
+
             foreach ($authorsModels as $authorModel) {
-                $this->link('authors', $authorModel);
+                $this->link(Author::AUTHORS, $authorModel);
             }
+
         }
     }
 

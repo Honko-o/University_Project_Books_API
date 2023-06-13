@@ -15,6 +15,8 @@ use Yii;
  */
 class Author extends \yii\db\ActiveRecord
 {
+    public const AUTHORS = 'authors';
+
     /**
      * {@inheritdoc}
      */

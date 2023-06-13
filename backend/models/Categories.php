@@ -13,6 +13,8 @@ namespace backend\models;
  */
 class Categories extends \yii\db\ActiveRecord
 {
+    public const CATEGORIES = 'categories';
+
     /**
      * {@inheritdoc}
      */
