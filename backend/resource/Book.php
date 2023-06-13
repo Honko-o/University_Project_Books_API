@@ -20,7 +20,7 @@
 
         public function fields()
         {
-            return array_merge(parent::fields(), ['categories', 'authors']);
+            return array_merge(parent::fields(), ['categories', 'authors', 'isFavoriteBook']);
         }
 
         /**

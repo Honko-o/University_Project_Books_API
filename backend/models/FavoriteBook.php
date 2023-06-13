@@ -69,6 +69,11 @@ class FavoriteBook extends \yii\db\ActiveRecord
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
+    public function getIsFavorite()
+    {
+        return ;
+    }
+
     /**
      * {@inheritdoc}
      * @return \backend\models\query\FavoriteBookQuery the active query used by this AR class.

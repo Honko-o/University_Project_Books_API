@@ -39,7 +39,7 @@ class UserController extends ActiveController
 
         if ($LoginFormModel->login()) {
             $user = User::findByUsername($LoginFormModel->username);
-            $accessToken = $user->attributes;
+            $accessToken = $user->attributes['access_token'];
 
             return [
                 'status' => 'Successful',

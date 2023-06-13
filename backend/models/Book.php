@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "book".
@@ -202,6 +203,11 @@ class Book extends \yii\db\ActiveRecord
     public function getUsers()
     {
         return $this->hasMany(User::class, ['id' => 'user_id'])->viaTable('favorite_book', ['book_id' => 'id']);
+    }
+
+    public function getIsFavoriteBook()
+    {
+        return $this->getFavoriteBooks()->andWhere(['user_id' => Yii::$app->user->id])->exists();
     }
 
     /**
