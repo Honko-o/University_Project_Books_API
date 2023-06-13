@@ -60,6 +60,8 @@ return [
                         ],
                     'pluralize' => true,
                 ],
+                'POST login' => 'user/login',
+                'POST signup' => 'user/signup',
             ],
         ],
     ],
