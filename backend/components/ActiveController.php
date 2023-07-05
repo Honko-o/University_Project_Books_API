@@ -4,6 +4,7 @@
 
 use backend\models\Order;
 use yii\filters\auth\HttpBearerAuth;
+use yii\helpers\VarDumper;
 use yii\web\ForbiddenHttpException;
 
 class ActiveController extends \yii\rest\ActiveController
@@ -11,9 +12,11 @@ class ActiveController extends \yii\rest\ActiveController
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        $behaviors['authenticator']['only'] = ['create', 'delete', 'update'];
-        $behaviors['authenticator']['authMethods'] = [
-            HttpBearerAuth::class,
+
+        $behaviors['authenticator'] = [
+            'class' => HttpBearerAuth::class,
+            'only' => ['create', 'delete', 'update'],
+            'optional' => ['index', 'view'],
         ];
 
         return $behaviors;

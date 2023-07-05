@@ -3,7 +3,6 @@
 namespace backend\models;
 
 use Yii;
-use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "book".
@@ -213,7 +212,12 @@ class Book extends \yii\db\ActiveRecord
 
     public function getIsFavoriteBook()
     {
-        return $this->getFavoriteBooks()->andWhere(['user_id' => Yii::$app->user->id])->exists();
+        
+        if (!Yii::$app->user->isGuest) {
+            return $this->getFavoriteBooks()->andWhere(['user_id' => Yii::$app->user->id])->exists();
+        }
+
+        return null;
     }
 
     /**

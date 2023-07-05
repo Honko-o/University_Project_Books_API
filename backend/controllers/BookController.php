@@ -11,9 +11,6 @@ class BookController extends ActiveController
 
     public function behaviors()
     {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator']['only'] = ['view', 'index', 'create', 'delete', 'update', 'create'];
-
-        return $behaviors;
+        return parent::behaviors();
     }
 }

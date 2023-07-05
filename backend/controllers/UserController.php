@@ -43,6 +43,7 @@ class UserController extends ActiveController
 
             return [
                 'status' => 'Successful',
+                'user_id' => \Yii::$app->user->getId(),
                 'access_token' => $accessToken,
             ];
         } else {
